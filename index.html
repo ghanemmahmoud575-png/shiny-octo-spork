@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ENPEDCOTK</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f172a">
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="top">
+  <div style="display:flex;align-items:center;gap:10px">
+    <img src="logo.png" alt="DAPETCO" style="height:40px">
+    <h2>ENPEDCOTK</h2>
+  </div>
+
+  <select id="tankSelect" onchange="liveCalc();isSaved=false">
+    <option value="C">Tank C</option>
+    <option value="D">Tank D</option>
+  </select>
+</header>
+
+<main>
+
+<button class="primary" onclick="addTruck()"> Add Truck</button>
+
+<div id="trucksList"></div>
+
+<section class="card">
+  <h3>Tank Measurements</h3>
+
+  <div class="row">
+    <div>
+      <label>Before Unloading (قبل التفريغ) (cm)</label>
+      <input id="beforeCC" type="number" oninput="liveCalc();isSaved=false">
+      <small id="beforeBBL">0 BBL</small>
+    </div>
+    <div>
+      <label>After Unloading (بعد التفريغ) (cm)</label>
+      <input id="afterCC" type="number" oninput="liveCalc();isSaved=false">
+      <small id="afterBBL">0 BBL</small>
+    </div>
+  </div>
+
+  <div class="row">
+    <div>
+      <label>After Drain (بعد الدرين) (cm)</label>
+      <input id="afterDrainCC" type="number" oninput="liveCalc();isSaved=false">
+      <small id="afterDrainBBL">0 BBL</small>
+    </div>
+    <div>
+      <label>After Hamra (بعد الحمرا) (cm)</label>
+      <input id="afterHamraCC" type="number" oninput="liveCalc();isSaved=false">
+      <small id="afterHamraBBL">0 BBL</small>
+    </div>
+  </div>
+
+  <div class="result">
+    <div>Difference (الفرق): <b id="actualTankNet">0</b> BBL</div>
+    <div>Status (الحالة): <b id="status">OK</b></div>
+    <div>Drain Qty (كمية الدرين): <b id="drainQty">0</b> BBL</div>
+  </div>
+</section>
+
+<section class="card narrow">
+  <label>Discharge Date (تاريخ التدفيع)</label>
+  <input type="text" id="dischargeDate" oninput="isSaved=false">
+</section>
+
+<div class="actions">
+  <button class="save" onclick="saveDay()"> Save (حفظ)</button>
+  <button class="edit" onclick="clearInputs()"> Clear (حذف)</button>
+  <button class="whatsapp" onclick="sendWhatsApp()">WhatsApp</button>
+</div>
+
+<h3>Saved Days (الأيام المحفوظه)</h3>
+<div class="saved" id="savedDaysList"></div>
+
+</main>
+
+<script src="script.js"></script>
+
+  <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+  </script>
+</body>
+</html>
