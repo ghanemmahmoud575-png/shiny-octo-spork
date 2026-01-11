@@ -2327,7 +2327,7 @@ function sendSavedWhatsApp(d){
   const backup = JSON.parse(JSON.stringify({
     trucks, date:dischargeDate.value, tank:tankSelect.value,
     before:beforeCC.value, after:afterCC.value,
-    draindrain:afterDrainCC.value, hamra:afterHamraCC.value
+    drain:afterDrainCC.value, hamra:afterHamraCC.value
   }));
 
   editDay(d);
@@ -2350,4 +2350,5 @@ if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
     navigator.serviceWorker.register("./service-worker.js");
   });
+
 } 
